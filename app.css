@@ -13,8 +13,15 @@ body {
   /* this max-width = html max-width - 2 * (this margin) = 640 - 2*8 */
 }
 
-header > h1 {
-  margin: 4px 0;
+header {
+  background-color: lavender;
+  padding: 4px 4px 0 4px;
+}
+
+header > h2 {
+  margin: 0;
+  padding-bottom: 5px; /* for symmetry with nav items */
+  border-bottom: 1px solid grey;
 }
 
 nav {
@@ -28,11 +35,20 @@ nav {
 nav > h2 {
   margin: 4px;
   padding: 0 4px;
+  border: 1px solid rgba(230,230,250,0);
 }
+/* An invisible border is defined here so affected element heights do not change
+   when visible border appears to indicate a selected element.  This invisible
+   border causes the initial vertical margins to be 5px. The 'header > h2'
+   padding-bottom is defined to match this margin. This favors vertical spacing
+   symmetry between 'header > h2' and unselected 'nav > h2', about 'header > h2'
+   boder-bottom. When a 1st-row nav item is selected, the majority of the
+   horizontal space taken by 'header > h2' border-bottom will exclude
+   'nav > .selected' even with standard small-width screens. */
 
 nav > h2:hover {
-  color: darkgoldenrod;
   background-color: azure;
+  color: darkgoldenrod;
 }
 
 nav > .selected {
@@ -42,6 +58,11 @@ nav > .selected {
 
 main {
   visibility: hidden;
+}
+
+main > h1 > .profile-name {
+  background-color: azure;
+  color: darkgoldenrod;
 }
 
 .cat-image-frame {
