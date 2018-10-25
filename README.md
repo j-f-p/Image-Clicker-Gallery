@@ -1,8 +1,8 @@
-# Cat Clicker
+# Image Clicker Album
 
-## Abstract
+## Description
 
-This is a page containing a list of five cats by name. When the user clicks on a name, a profile of that cat is displayed. Each profile contains a cat image and informs the user how many times the user has clicked on the cat image. This page is built with HTML, CSS and JavaScript (ES 6). The script follows the Model-View-Controller software architectural pattern. This page was confirmed with three browsers: Chrome 69, FireFox 62 and Edge 42.
+This is a page containing an album of five images. A list of image labels appear at the top of the page. When the user clicks on an image label, the image is displayed, along with the number of times the user has clicked on the image. The number of image clicks is accumulated from the time the page was loaded and is unique to each image. In addition, when an image is displayed, an edit button appears below it. Clicking on the edit button, enables the user to change the image, by way of url, and the name of the image. An image url change will be accompanied with an image click count set to zero. This page is built with HTML, CSS and JavaScript (ES 6). The script follows the Model-View-Controller software architectural pattern. This page was confirmed with three browsers: Chrome 69, FireFox 63 and Edge 42.
 
 ## Project Execution
 
