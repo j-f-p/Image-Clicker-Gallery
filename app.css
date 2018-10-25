@@ -1,0 +1,87 @@
+html {
+  min-width: 320px; /* based on a low threshold of widths of smart phones */
+  max-width: 640px; /* a round number by design */
+  margin: 0 auto;
+}
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  text-align: center;
+  color: #222;
+  background-image: url(folk-pattern.png);
+  background-attachment: fixed;
+  /* this max-width = html max-width - 2 * (this margin) = 640 - 2*8 */
+}
+
+header > h1 {
+  margin: 4px 0;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: lavender;
+}
+
+nav > h2 {
+  margin: 4px;
+  padding: 0 4px;
+}
+
+nav > h2:hover {
+  color: darkgoldenrod;
+  background-color: azure;
+}
+
+nav > .selected {
+  background-color: lightgrey;
+  border: 1px solid black;
+}
+
+main {
+  visibility: hidden;
+}
+
+.cat-image-frame {
+  /* html min-width - 2*(body margin_x = 8px) = 304px
+                                  = body min-width = big-tile min-width */
+  height: 500px;
+  background-color: lightgrey;
+  margin: 16px auto;
+  overflow: hidden;
+}
+
+.cat-image-frame > .cat-image {
+  width: calc(100% - 8px); /* (cat-image-frame) - 2*(this margin_x) */
+  height: 80%; /* = 400 px */
+  background-position: center; /* to view desired responsive range of image */
+  background-size: cover;
+  background-color: grey; /* background image fallback graphics */
+  margin: 4px 4px 0 4px; /* 0 bottom to help simplify text centering below */
+}
+
+.cat-image-frame > .click-count-label {
+  height: 96px; /* (500 - cat-image height) - cat-image margin = 100 - 4 */
+  line-height: 92px; /* to center text vertically in element */
+  margin: 0;
+}
+
+@media screen and (max-width: 560px) {
+  .cat-image-frame > .click-count-label {
+    font-size: 1.7em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cat-image-frame > .click-count-label {
+    font-size: 1.4em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .cat-image-frame > .click-count-label {
+    font-size: 1.1em;
+  }
+}
