@@ -13,18 +13,24 @@ const view = {
   selected_i: -1, // a clear declaration with a placeholder initialization
   navElement: document.getElementsByTagName('nav')[0],
   mainElement: document.getElementsByTagName('main')[0],
-  imageElement: document.getElementsByClassName('cat-image')[0],
-  nameElement0: document.getElementsByClassName('profile-name')[0],
-  nameElement1: document.getElementsByClassName('profile-name')[1],
+  imageElement: document.getElementsByClassName('image')[0],
+  nameInTitle: document.getElementsByClassName('profile-name-title')[0],
+  nameInLabel: document.getElementsByClassName('profile-name-text')[0],
   clickCountElement: document.getElementsByClassName('click-count')[0]
 };
 view.renderProfile = function(index) {
   const profile = controller.profile(index);
-  view.nameElement0.textContent = profile.name;
-  view.imageElement.style.backgroundImage = `url(${profile.image})`;
-  view.imageElement.className = `cat-image ${index}`;
-  view.nameElement1.textContent = profile.name;
-  view.clickCountElement.textContent = profile.numClicks;
+  // DELETE:
+  view.mainElement.style.backgroundColor = 'lavender';
+  view.mainElement.innerHTML = `<p>${profile.name}</p>
+                                <p>${profile.image}</p>
+                                <p>${profile.numClicks}</p>`;
+  // UNCOMMENT:
+  // view.nameInTitle.textContent = profile.name;
+  // view.imageElement.style.backgroundImage = `url(${profile.image})`;
+  // view.imageElement.className = `image ${index}`;
+  // view.nameInLabel.textContent = profile.name;
+  // view.clickCountElement.textContent = profile.numClicks;
 };
 view.navItemClickResponse = function(event) {
   const classList = event.target.classList;
@@ -57,6 +63,8 @@ view.renderNavBar = function() {
     navItem.textContent = controller.profile(i).name;
     navItem.className = `item ${i}`;
     view.navElement.appendChild(navItem);
+    // DELETE:
+    controller.profile(i).numClicks = 10;
   }
 };
 view.initNavBar = function() {
@@ -74,7 +82,7 @@ view.initClickCounter = function() {
 const controller = {
   init: function() {
     view.initNavBar();
-    view.initClickCounter();
+    // view.initClickCounter(); UNCOMMENT
   },
   numProfiles: function() {
     return model.profiles.length;
