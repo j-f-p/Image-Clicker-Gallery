@@ -45,6 +45,7 @@ nav > h2 {
    horizontal space taken by 'header > h2' border-bottom will exclude
    'nav > .selected' even with standard small-width screens. */
 nav > h2:hover {
+  cursor: pointer;
   background-color: azure;
   color: darkgoldenrod;
 }
@@ -121,4 +122,53 @@ main > h1 > .profile-name-title {
 .edit-image-button > h2 > span:hover {
   background-color: azure;
   color: darkgoldenrod;
+  cursor: pointer;
+}
+
+.image-edit-frame {
+  background-color: lavender;
+}
+.image-edit-frame > form {
+  margin: 16px 0;
+  text-align: left;
+}
+.image-edit-frame > form > label {
+  display: inline-block;
+  margin: 8px 8px 0 8px;
+  width: 128px;
+  text-align: right;
+}
+.image-edit-frame > form > input {
+  margin: 8px;
+  font-family: "lucida console", monospace;
+  font-size: 1em;
+}
+.image-edit-frame > form > textarea {
+  width: 70%;
+  margin: 8px;
+  vertical-align: top;
+  font-family: "lucida console", monospace;
+  font-size: 1em;
+}
+@media screen and (max-width: 569px) {
+  .image-edit-frame > form > textarea {
+    width: 90%;
+  }
+}
+.image-edit-frame > form > button {
+  margin: 8px;
+  font-family: inherit;
+  font-size: 1em;
+  border: 1px solid grey;
+  background-color: gainsboro;
+}
+.image-edit-frame > form > .save-button:hover {
+  cursor: pointer;
+  background-color: lightblue;
+  border: 1px solid blue;
+}
+.image-edit-frame > form > .cancel-button:hover {
+  cursor: pointer;
+  background-color: lightsalmon;
+  border: 1px solid crimson;
 }

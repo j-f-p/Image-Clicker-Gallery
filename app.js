@@ -83,6 +83,9 @@ const controller = {
   init: function() {
     view.initNavBar();
     // view.initClickCounter(); UNCOMMENT
+
+    // DELETE:
+    view.navElement.lastChild.click();
   },
   numProfiles: function() {
     return model.profiles.length;
