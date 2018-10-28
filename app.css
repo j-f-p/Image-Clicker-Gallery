@@ -127,6 +127,7 @@ main > h1 > .profile-name-title {
 
 .image-edit-frame {
   background-color: lavender;
+  visibility: hidden;
 }
 .image-edit-frame > form {
   margin: 16px 0;

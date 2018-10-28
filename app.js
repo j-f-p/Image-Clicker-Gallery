@@ -18,6 +18,7 @@ const view = {
   nameInLabel: document.getElementsByClassName('profile-name-text')[0],
   clickCountElement: document.getElementsByClassName('click-count')[0],
   editImageButton: document.getElementsByClassName('edit-image-button')[0],
+  imageEditFrame: document.getElementsByClassName('image-edit-frame')[0],
   formElement: document.getElementsByTagName('form')[0],
   newImageLabelElement: document.getElementById('newImageLabel'),
   newImageURLelement: document.getElementById('newImageURL'),
@@ -87,6 +88,11 @@ view.initClickCounter = function() {
     view.clickCountElement.textContent = controller.profile(i).numClicks;
   });
 };
+view.initEditImageButton = function() {
+  view.editImageButton.addEventListener( 'click', function() {
+    view.imageEditFrame.style.visibility = 'visible';
+  });
+};
 view.initSaveEditButton = function() {
   view.saveEditButton.addEventListener( 'click', function(event) {
     if ( view.newImageLabelElement.checkValidity() &&
@@ -102,7 +108,7 @@ view.initSaveEditButton = function() {
       profile.numClicks = 0;
       view.reRenderSelectedNavItemText(profile.name);
       view.renderProfile();
-      // TODO: hide form
+      view.imageEditFrame.style.visibility = 'hidden';
     }
   });
 };
@@ -110,18 +116,20 @@ view.initCancelEditButton = function() {
   view.cancelEditButton.addEventListener( 'click', function(event) {
     event.preventDefault();
     view.formElement.reset();
-    // TODO: hide form
+    view.imageEditFrame.style.visibility = 'hidden';
   });
 };
 
 const controller = {
   init: function() {
     view.initNavBar();
-    // view.initClickCounter(); UNCOMMENT
-
+    controller.initClickListeners();
     // DELETE:
     view.navElement.lastChild.click();
-    // TODO: move the next to lines after edit form button is enabled
+  },
+  initClickListeners: function() {
+    // view.initClickCounter(); UNCOMMENT
+    view.initEditImageButton();
     view.initSaveEditButton();
     view.initCancelEditButton();
   },
