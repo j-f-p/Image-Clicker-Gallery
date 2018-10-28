@@ -13,13 +13,19 @@ const view = {
   selected_i: -1, // a clear declaration with a placeholder initialization
   navElement: document.getElementsByTagName('nav')[0],
   mainElement: document.getElementsByTagName('main')[0],
-  imageElement: document.getElementsByClassName('image')[0],
   nameInTitle: document.getElementsByClassName('profile-name-title')[0],
+  imageElement: document.getElementsByClassName('image')[0],
   nameInLabel: document.getElementsByClassName('profile-name-text')[0],
-  clickCountElement: document.getElementsByClassName('click-count')[0]
+  clickCountElement: document.getElementsByClassName('click-count')[0],
+  editImageButton: document.getElementsByClassName('edit-image-button')[0],
+  formElement: document.getElementsByTagName('form')[0],
+  newImageLabelElement: document.getElementById('newImageLabel'),
+  newImageURLelement: document.getElementById('newImageURL'),
+  saveEditButton: document.getElementsByClassName('save-button')[0],
+  cancelEditButton: document.getElementsByClassName('cancel-button')[0]
 };
-view.renderProfile = function(index) {
-  const profile = controller.profile(index);
+view.renderProfile = function() {
+  const profile = controller.profile(view.selected_i);
   // DELETE:
   view.mainElement.style.backgroundColor = 'lavender';
   view.mainElement.innerHTML = `<p>${profile.name}</p>
@@ -41,7 +47,7 @@ view.navItemClickResponse = function(event) {
       .classList.remove('selected');
   classList.add('selected');
   view.selected_i = parseInt( classList.item(1) );
-  view.renderProfile(view.selected_i);
+  view.renderProfile();
 };
 view.navItemFirstClickResponse = function(event) {
   const classList = event.target.classList;
@@ -51,12 +57,15 @@ view.navItemFirstClickResponse = function(event) {
   }
   classList.add('selected');
   view.selected_i = parseInt( classList.item(1) );
-  view.renderProfile(view.selected_i);
+  view.renderProfile();
   view.mainElement.style.visibility = 'visible';
   view.navElement.removeEventListener('click', view.navItemFirstClickResponse);
   view.navElement.addEventListener('click', view.navItemClickResponse);
 };
-view.renderNavBar = function() {
+view.reRenderSelectedNavItemText = function(newImageLabel) {
+  view.navElement.children.item(view.selected_i).textContent = newImageLabel;
+};
+view.initRenderNavBar = function() {
   const numProfiles = controller.numProfiles();
   for(let i=0; i<numProfiles; i++) {
     const navItem = document.createElement('h2');
@@ -68,7 +77,7 @@ view.renderNavBar = function() {
   }
 };
 view.initNavBar = function() {
-  view.renderNavBar();
+  view.initRenderNavBar();
   view.navElement.addEventListener( 'click', view.navItemFirstClickResponse );
 };
 view.initClickCounter = function() {
@@ -76,6 +85,32 @@ view.initClickCounter = function() {
     i = parseInt( view.imageElement.classList.item(1) );
     controller.profile(i).numClicks++;
     view.clickCountElement.textContent = controller.profile(i).numClicks;
+  });
+};
+view.initSaveEditButton = function() {
+  view.saveEditButton.addEventListener( 'click', function(event) {
+    if ( view.newImageLabelElement.checkValidity() &&
+         view.newImageURLelement.checkValidity() ) {
+      event.preventDefault();
+      const profile = controller.profile(view.selected_i);
+      // TODO: proceed only if set of profile values is unique
+      profile.name = view.newImageLabelElement.value;
+      profile.image = view.newImageURLelement.value;
+      // view.newImageLabelElement.value = "";
+      // view.newImageURLelement.value = "";
+      view.formElement.reset();
+      profile.numClicks = 0;
+      view.reRenderSelectedNavItemText(profile.name);
+      view.renderProfile();
+      // TODO: hide form
+    }
+  });
+};
+view.initCancelEditButton = function() {
+  view.cancelEditButton.addEventListener( 'click', function(event) {
+    event.preventDefault();
+    view.formElement.reset();
+    // TODO: hide form
   });
 };
 
@@ -86,6 +121,9 @@ const controller = {
 
     // DELETE:
     view.navElement.lastChild.click();
+    // TODO: move the next to lines after edit form button is enabled
+    view.initSaveEditButton();
+    view.initCancelEditButton();
   },
   numProfiles: function() {
     return model.profiles.length;
