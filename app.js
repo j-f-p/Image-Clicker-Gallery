@@ -100,28 +100,38 @@ view.initEditImageButton = function() {
 };
 view.initSaveEditButton = function() {
   view.saveEditButton.addEventListener( 'click', function(event) {
-    if ( view.newImageLabelElement.checkValidity() &&
-         view.newImageURLelement.checkValidity() ) {
+    if( view.newImageLabelElement.checkValidity() &&
+        view.newImageURLelement.checkValidity() ) {
+
       event.preventDefault();
       const profile = controller.profile(view.selected_i);
-      // TODO: proceed only if set of profile values is unique
-      profile.name = view.newImageLabelElement.value;
-      profile.image = view.newImageURLelement.value;
-      // view.newImageLabelElement.value = "";
-      // view.newImageURLelement.value = "";
-      view.formElement.reset();
-      profile.numClicks = 0;
-      view.reRenderSelectedNavItemText(profile.name);
-      view.renderProfile();
-      view.imageEditFrame.style.visibility = 'hidden';
+
+      if( view.newImageLabelElement.value!=profile.name ||
+          view.newImageURLelement.value!=profile.image ) {
+        // Proceed only if pair of profile values is unique.
+        profile.name = view.newImageLabelElement.value;
+        profile.image = view.newImageURLelement.value;
+        profile.numClicks = 0;
+        view.imageEditFrame.style.visibility = 'hidden';
+        view.formElement.reset();
+        view.reRenderSelectedNavItemText(profile.name);
+        view.renderProfile();
+      } else {
+        // Close form.
+        view.imageEditFrame.style.visibility = 'hidden';
+        view.formElement.reset();
+        // Inform user that existing values are retained by alert.
+        alert( 'Inputs matched existing values,' +
+          'thus, prior image properties retained.' );
+      }
     }
   });
 };
 view.initCancelEditButton = function() {
   view.cancelEditButton.addEventListener( 'click', function(event) {
     event.preventDefault();
-    view.formElement.reset();
     view.imageEditFrame.style.visibility = 'hidden';
+    view.formElement.reset();
   });
 };
 
