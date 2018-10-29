@@ -1,7 +1,7 @@
 
 const model = {
   profiles: [
-    {name: "Alpha", image: "alpha.png", numClicks: 0},
+    {name: "Alpha", image: "alpha.jpg", numClicks: 0},
     {name: "Bravo", image: "bravo.jpg", numClicks: 0},
     {name: "Charlie", image: "charlie.jpg", numClicks: 0},
     {name: "Delta", image: "delta.jpg", numClicks: 0},
@@ -27,11 +27,16 @@ const view = {
 };
 view.renderProfile = function() {
   const profile = controller.profile(view.selected_i);
-  // DELETE:
-  view.mainElement.style.backgroundColor = 'lavender';
-  view.mainElement.innerHTML = `<p>${profile.name}</p>
+  // DELETE UNTIL UNCOMMENT:
+  // view.mainElement.style.backgroundColor = 'lavender';
+  view.mainElement.innerHTML = `
+                  <div style="background-color: lavender">
+                                <p>${profile.name}</p>
                                 <p>${profile.image}</p>
-                                <p>${profile.numClicks}</p>`;
+                                <p>${profile.numClicks}</p>
+                  </div>`;
+  view.mainElement.appendChild(view.editImageButton);
+  view.mainElement.appendChild(view.imageEditFrame);
   // UNCOMMENT:
   // view.nameInTitle.textContent = profile.name;
   // view.imageElement.style.backgroundImage = `url(${profile.image})`;
