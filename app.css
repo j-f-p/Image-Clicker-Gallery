@@ -125,6 +125,16 @@ main > h1 > .profile-name-title {
   cursor: pointer;
 }
 
+.alert-message-frame {
+  background-color: yellow;
+  margin: 16px 0;
+  text-align: left;
+}
+.alert-message-frame > h3 {
+  display: inline-block;
+  margin: 9px; /* to left align with edit image button text */
+}
+
 .image-edit-frame {
   background-color: lavender;
   visibility: hidden;

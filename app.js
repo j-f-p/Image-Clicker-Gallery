@@ -18,6 +18,7 @@ const view = {
   nameInLabel: document.getElementsByClassName('profile-name-text')[0],
   clickCountElement: document.getElementsByClassName('click-count')[0],
   editImageButton: document.getElementsByClassName('edit-image-button')[0],
+  alertMessageFrame: null, // placed here for convenience of developer reference
   imageEditFrame: document.getElementsByClassName('image-edit-frame')[0],
   formElement: document.getElementsByTagName('form')[0],
   newImageLabelElement: document.getElementById('newImageLabel'),
@@ -25,10 +26,13 @@ const view = {
   saveEditButton: document.getElementsByClassName('save-button')[0],
   cancelEditButton: document.getElementsByClassName('cancel-button')[0]
 };
+view.closeImageEditFrame = function() {
+  view.imageEditFrame.style.visibility = 'hidden';
+  view.formElement.reset();
+}
 view.renderProfile = function() {
   const profile = controller.profile(view.selected_i);
   // DELETE UNTIL UNCOMMENT:
-  // view.mainElement.style.backgroundColor = 'lavender';
   view.mainElement.innerHTML = `
                   <div style="background-color: lavender">
                                 <p>${profile.name}</p>
@@ -43,6 +47,9 @@ view.renderProfile = function() {
   // view.imageElement.className = `image ${index}`;
   // view.nameInLabel.textContent = profile.name;
   // view.clickCountElement.textContent = profile.numClicks;
+  if( view.imageEditFrame.style.visibility==='visible' ) {
+    view.closeImageEditFrame();
+  }
 };
 view.navItemClickResponse = function(event) {
   const classList = event.target.classList;
@@ -98,7 +105,18 @@ view.initEditImageButton = function() {
     view.imageEditFrame.style.visibility = 'visible';
   });
 };
+view.initAlertElement = function() {
+  const alertElement = document.createElement('div');
+  alertElement.classList.add('alert-message-frame');
+  alertElement.innerHTML = `
+    <h3>Inputs matched existing values, thus,
+        prior image properties retained.</h3>
+  `;
+  return alertElement;
+}
 view.initSaveEditButton = function() {
+  view.alertMessageFrame = view.initAlertElement();
+
   view.saveEditButton.addEventListener( 'click', function(event) {
     if( view.newImageLabelElement.checkValidity() &&
         view.newImageURLelement.checkValidity() ) {
@@ -112,17 +130,21 @@ view.initSaveEditButton = function() {
         profile.name = view.newImageLabelElement.value;
         profile.image = view.newImageURLelement.value;
         profile.numClicks = 0;
-        view.imageEditFrame.style.visibility = 'hidden';
-        view.formElement.reset();
+        view.closeImageEditFrame();
         view.reRenderSelectedNavItemText(profile.name);
         view.renderProfile();
       } else {
         // Close form.
-        view.imageEditFrame.style.visibility = 'hidden';
-        view.formElement.reset();
-        // Inform user that existing values are retained by alert.
-        alert( 'Inputs matched existing values,' +
-          'thus, prior image properties retained.' );
+        view.closeImageEditFrame();
+
+        // Render alert message.
+        view.editImageButton
+            .insertAdjacentElement('afterend',view.alertMessageFrame);
+
+        // Remove alert message after 3 sec.
+        setTimeout( function() {
+          view.mainElement.removeChild(view.alertMessageFrame);
+        }, 3000 );
       }
     }
   });
@@ -130,8 +152,7 @@ view.initSaveEditButton = function() {
 view.initCancelEditButton = function() {
   view.cancelEditButton.addEventListener( 'click', function(event) {
     event.preventDefault();
-    view.imageEditFrame.style.visibility = 'hidden';
-    view.formElement.reset();
+    view.closeImageEditFrame();
   });
 };
 
