@@ -29,7 +29,16 @@ const view = {
 view.closeImageEditFrame = function() {
   view.imageEditFrame.style.visibility = 'hidden';
   view.formElement.reset();
-}
+};
+view.renderNewImageLabels = function(newImageLabel) {
+  view.navElement.children.item(view.selected_i).textContent = newImageLabel;
+  view.nameInTitle.textContent = newImageLabel;
+  view.nameInLabel.textContent = newImageLabel;
+};
+view.renderNewProfileImage = function(profile) {
+  view.imageElement.style.backgroundImage = `url(${profile.image})`;
+  view.clickCountElement.textContent = profile.numClicks;
+};
 view.renderProfile = function() {
   const profile = controller.profile(view.selected_i);
   view.nameInTitle.textContent = profile.name;
@@ -65,9 +74,6 @@ view.navItemFirstClickResponse = function(event) {
   view.navElement.removeEventListener('click', view.navItemFirstClickResponse);
   view.navElement.addEventListener('click', view.navItemClickResponse);
 };
-view.reRenderSelectedNavItemText = function(newImageLabel) {
-  view.navElement.children.item(view.selected_i).textContent = newImageLabel;
-};
 view.initRenderNavBar = function() {
   const numProfiles = controller.numProfiles();
   for(let i=0; i<numProfiles; i++) {
@@ -97,11 +103,11 @@ view.initAlertElement = function() {
   const alertElement = document.createElement('div');
   alertElement.classList.add('alert-message-frame');
   alertElement.innerHTML = `
-    <h3>Inputs matched existing values, thus,
-        prior image properties retained.</h3>
+    <h3>Entered URL matched existing value, thus,
+        prior image click count retained.</h3>
   `;
   return alertElement;
-}
+};
 view.initSaveEditButton = function() {
   view.alertMessageFrame = view.initAlertElement();
 
@@ -112,15 +118,18 @@ view.initSaveEditButton = function() {
       event.preventDefault();
       const profile = controller.profile(view.selected_i);
 
-      if( view.newImageLabelElement.value!=profile.name ||
-          view.newImageURLelement.value!=profile.image ) {
-        // Proceed only if pair of profile values is unique.
+      if(view.newImageLabelElement.value!=profile.name &&
+         view.newImageLabelElement.value!='') {
         profile.name = view.newImageLabelElement.value;
+        view.renderNewImageLabels(profile.name);
+      } // Otherwise, keep name.
+
+      if(view.newImageURLelement.value!=profile.image) {
+        // Proceed only if image url is unique.
         profile.image = view.newImageURLelement.value;
         profile.numClicks = 0;
         view.closeImageEditFrame();
-        view.reRenderSelectedNavItemText(profile.name);
-        view.renderProfile();
+        view.renderNewProfileImage(profile);
       } else {
         // Close form.
         view.closeImageEditFrame();

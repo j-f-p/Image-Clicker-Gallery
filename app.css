@@ -153,6 +153,10 @@ main > h1 > .profile-name-title {
   font-family: "lucida console", monospace;
   font-size: 1em;
 }
+.image-edit-frame > form > p {
+  display: inline-block;
+  margin: 0 0 8px 8px;
+}
 .image-edit-frame > form > textarea {
   width: 70%;
   margin: 8px;
@@ -161,6 +165,9 @@ main > h1 > .profile-name-title {
   font-size: 1em;
 }
 @media screen and (max-width: 569px) {
+  .image-edit-frame > form > label {
+    text-align: left;
+  }
   .image-edit-frame > form > textarea {
     width: 90%;
   }
