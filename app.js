@@ -32,21 +32,11 @@ view.closeImageEditFrame = function() {
 }
 view.renderProfile = function() {
   const profile = controller.profile(view.selected_i);
-  // DELETE UNTIL UNCOMMENT:
-  view.mainElement.innerHTML = `
-                  <div style="background-color: lavender">
-                                <p>${profile.name}</p>
-                                <p>${profile.image}</p>
-                                <p>${profile.numClicks}</p>
-                  </div>`;
-  view.mainElement.appendChild(view.editImageButton);
-  view.mainElement.appendChild(view.imageEditFrame);
-  // UNCOMMENT:
-  // view.nameInTitle.textContent = profile.name;
-  // view.imageElement.style.backgroundImage = `url(${profile.image})`;
-  // view.imageElement.className = `image ${index}`;
-  // view.nameInLabel.textContent = profile.name;
-  // view.clickCountElement.textContent = profile.numClicks;
+  view.nameInTitle.textContent = profile.name;
+  view.imageElement.style.backgroundImage = `url(${profile.image})`;
+  view.imageElement.className = `image ${view.selected_i}`;
+  view.nameInLabel.textContent = profile.name;
+  view.clickCountElement.textContent = profile.numClicks;
   if( view.imageEditFrame.style.visibility==='visible' ) {
     view.closeImageEditFrame();
   }
@@ -85,8 +75,6 @@ view.initRenderNavBar = function() {
     navItem.textContent = controller.profile(i).name;
     navItem.className = `item ${i}`;
     view.navElement.appendChild(navItem);
-    // DELETE:
-    controller.profile(i).numClicks = 10;
   }
 };
 view.initNavBar = function() {
@@ -160,11 +148,9 @@ const controller = {
   init: function() {
     view.initNavBar();
     controller.initClickListeners();
-    // DELETE:
-    view.navElement.lastChild.click();
   },
   initClickListeners: function() {
-    // view.initClickCounter(); UNCOMMENT
+    view.initClickCounter();
     view.initEditImageButton();
     view.initSaveEditButton();
     view.initCancelEditButton();

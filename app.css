@@ -8,8 +8,7 @@ body {
   font-family: Roboto, Arial, sans-serif;
   text-align: center;
   color: #222;
-  /* background-image: url(folk-pattern.png); *//*UNCOMMENT*/
-  background-color: dimgray; /*DELETE*/
+  background-image: url(folk-pattern.png);
   background-attachment: fixed;
   /* this max-width = html max-width - 2 * (this margin) = 640 - 2*8 */
 }
