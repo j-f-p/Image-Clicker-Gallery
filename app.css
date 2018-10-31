@@ -104,6 +104,7 @@ main > h1 > .profile-label-title {
   text-align: left;
 }
 .image-url-div > p {
+  word-wrap: break-word;
   margin: 4px 4px 16px;
 }
 
