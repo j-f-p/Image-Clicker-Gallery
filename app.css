@@ -56,7 +56,7 @@ nav > .selected {
 main {
   visibility: hidden;
 }
-main > h1 > .profile-name-title {
+main > h1 > .profile-label-title {
   background-color: azure;
   color: darkgoldenrod;
 }
@@ -66,7 +66,7 @@ main > h1 > .profile-name-title {
                                   = body min-width = big-tile min-width */
   height: 500px;
   background-color: lightgrey;
-  margin: 16px auto;
+  margin: 16px auto 0 auto;
   overflow: hidden;
 }
 .image-frame > .image {
@@ -97,6 +97,14 @@ main > h1 > .profile-name-title {
   .image-frame > .click-count-label {
     font-size: 1.1em;
   }
+}
+
+.image-url-div {
+  margin: 0 auto;
+  text-align: left;
+}
+.image-url-div > p {
+  margin: 4px 4px 16px;
 }
 
 .edit-image-button {
