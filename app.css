@@ -8,7 +8,9 @@ body {
   font-family: Roboto, Arial, sans-serif;
   text-align: center;
   color: #222;
-  background-image: url(folk-pattern.png);
+  background-image: url(images/folk-pattern.png);
+  /* Background image file source is:
+     https://www.toptal.com/designers/subtlepatterns/folk-pattern/ */
   background-attachment: fixed;
   /* this max-width = html max-width - 2 * (this margin) = 640 - 2*8 */
 }
@@ -82,7 +84,6 @@ main > h1 > .profile-label-title {
   line-height: 92px; /* to center text vertically in element */
   margin: 0;
 }
-
 @media screen and (max-width: 560px) {
   .image-frame > .click-count-label {
     font-size: 1.7em;

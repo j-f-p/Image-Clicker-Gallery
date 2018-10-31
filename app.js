@@ -1,22 +1,22 @@
 
 const model = {
   profiles: [
-    {label: "Alpha", imageFile: "alpha.jpg", numClicks: 0,
-     imageURL: ("https://www.thenational.ae/image/policy:1.776505:1538497810/" +
-                "Na-03-OCT-Hyperloop-NEW.jpg?f=16x9&w=1200&$p$f$w=6c1d176") },
-    {label: "Bravo", imageFile: "bravo.jpg", numClicks: 0,
-     imageURL: ("https://grist.files.wordpress.com/2018/05/gettyimages-" +
-                "176619985-e1535488791582.jpg?w=1024&h=576&crop=1") },
-    {label: "Charlie", imageFile: "charlie.jpg", numClicks: 0,
-     imageURL: "http://i.imgur.com/puDUy9I.jpg" },
-    {label: "Delta", imageFile: "delta.jpg", numClicks: 0,
-     imageURL: ("https://www.aopa.org/-/media/images/aopa-main/" +
-                "news-and-media/2017/november/1120_terrafugia_tfx1/" +
-                "1120_terrafugia_tfx1_16x9.jpg") },
-    {label: "Echo", imageFile: "echo.jpg", numClicks: 0,
-     imageURL: ("https://2gic212zgjlm2bcqpo21qnpk-wpengine.netdna-ssl.com/" +
-                "wp-content/uploads/2018/09/" +
-                "13670806_web1_180928-POI-M-hypersonic.jpg") }
+    {label: 'Alpha', imageFile: 'images/alpha.jpg', numClicks: 0,
+     imageURL: ('https://www.thenational.ae/image/policy:1.776505:1538497810/' +
+                'Na-03-OCT-Hyperloop-NEW.jpg?f=16x9&w=1200&$p$f$w=6c1d176') },
+    {label: 'Bravo', imageFile: 'images/bravo.jpg', numClicks: 0,
+     imageURL: ('https://grist.files.wordpress.com/2018/05/gettyimages-' +
+                '176619985-e1535488791582.jpg?w=1024&h=576&crop=1') },
+    {label: 'Charlie', imageFile: 'images/charlie.jpg', numClicks: 0,
+     imageURL: 'http://i.imgur.com/puDUy9I.jpg' },
+    {label: 'Delta', imageFile: 'images/delta.jpg', numClicks: 0,
+     imageURL: ('https://www.aopa.org/-/media/images/aopa-main/' +
+                'news-and-media/2017/november/1120_terrafugia_tfx1/' +
+                '1120_terrafugia_tfx1_16x9.jpg') },
+    {label: 'Echo', imageFile: 'images/echo.jpg', numClicks: 0,
+     imageURL: ('https://2gic212zgjlm2bcqpo21qnpk-wpengine.netdna-ssl.com/' +
+                'wp-content/uploads/2018/09/' +
+                '13670806_web1_180928-POI-M-hypersonic.jpg') }
   ]
 };
 
